@@ -4,6 +4,7 @@ export const storageKeys = {
   quizAttempts: "iso27001-lab:quiz-attempts",
   simulations: "iso27001-lab:simulations",
   practiceAttempts: "iso27001-lab:practice-attempts",
+  mockExamSessions: "iso27001-lab:mock-exam-sessions",
   contentStudioDrafts: "iso27001-lab:content-studio-drafts",
 } as const;
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useRef, useSyncExternalStore, type ReactNode } from "react";
-import { BookCheck, Brain, Languages, Radar, Trophy } from "lucide-react";
+import { BookCheck, Brain, FileCheck2, Languages, Radar, Trophy } from "lucide-react";
 import { buildDashboardSnapshot, type DashboardSnapshot } from "@/lib/learning-insights";
 import { practiceTopicLabels } from "@/lib/platform-data";
 import { storageKeys, subscribeToStorageKey } from "@/lib/storage";
@@ -31,7 +31,7 @@ export function DashboardOverview() {
 
   return (
     <section className="space-y-6">
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-6">
         <StatCard
           icon={<BookCheck className="size-5 text-sky-700" />}
           label="Completed modules"
@@ -55,6 +55,16 @@ export function DashboardOverview() {
           label="Vocabulary progress"
           value={`${snapshot.vocabularyProgress}%`}
           helper="bilingual terminology growth"
+        />
+        <StatCard
+          icon={<FileCheck2 className="size-5 text-violet-700" />}
+          label="Mock exams"
+          value={String(snapshot.mockExamAttempts)}
+          helper={
+            snapshot.bestMockExamScore !== null
+              ? `best score ${snapshot.bestMockExamScore}%`
+              : "no mock exam completed yet"
+          }
         />
         <StatCard
           icon={<Brain className="size-5 text-rose-700" />}

@@ -38,6 +38,16 @@ export type PracticeAttemptsState = {
 
 export type SimulationStore = Record<string, unknown>;
 
+export type MockExamSession = {
+  id: string;
+  mode: string;
+  score: number;
+  maxScore: number;
+  percent: number;
+  completedAt: string;
+  domainScores: Record<string, { correct: number; total: number }>;
+};
+
 export type DashboardSnapshot = {
   completedModules: number;
   inProgressModules: number;
@@ -56,6 +66,9 @@ export type DashboardSnapshot = {
   scenarioCompletions: number;
   vocabularyProgress: number;
   readinessScore: number;
+  mockExamAttempts: number;
+  latestMockExamScore: number | null;
+  bestMockExamScore: number | null;
 };
 
 export function readModuleProgress() {
@@ -80,6 +93,14 @@ export function readSimulationStore() {
 
 export function writeSimulationStore(state: SimulationStore) {
   writeStorageJson(storageKeys.simulations, state);
+}
+
+export function readMockExamSessions() {
+  return readStorageJson<MockExamSession[]>(storageKeys.mockExamSessions, []);
+}
+
+export function writeMockExamSessions(state: MockExamSession[]) {
+  writeStorageJson(storageKeys.mockExamSessions, state);
 }
 
 export function readContentStudioDrafts() {
@@ -127,6 +148,7 @@ export function buildDashboardSnapshot(): DashboardSnapshot {
   const quizAttempts = readModuleQuizAttempts();
   const practiceState = readPracticeAttempts();
   const simulations = readSimulationStore();
+  const mockExamSessions = readMockExamSessions();
 
   const progressValues = Object.values(progress);
   const completedModules = progressValues.filter((entry) => entry.completed).length;
@@ -179,12 +201,20 @@ export function buildDashboardSnapshot(): DashboardSnapshot {
       100,
   );
 
+  const latestMockExamScore = mockExamSessions[0]?.percent ?? null;
+  const bestMockExamScore =
+    mockExamSessions.length > 0
+      ? Math.max(...mockExamSessions.map((session) => session.percent))
+      : null;
+  const mockExamSignal = bestMockExamScore ?? latestMockExamScore ?? 0;
+
   const readinessScore = Math.round(
-    moduleReadiness * 0.45 +
-      averageModuleProgress * 0.15 +
-      practiceAccuracy * 0.2 +
-      practiceCoverage * 0.1 +
-      vocabularyProgress * 0.1,
+    moduleReadiness * 0.35 +
+      averageModuleProgress * 0.1 +
+      practiceAccuracy * 0.18 +
+      practiceCoverage * 0.08 +
+      vocabularyProgress * 0.09 +
+      mockExamSignal * 0.2,
   );
 
   return {
@@ -197,5 +227,8 @@ export function buildDashboardSnapshot(): DashboardSnapshot {
     scenarioCompletions,
     vocabularyProgress,
     readinessScore,
+    mockExamAttempts: mockExamSessions.length,
+    latestMockExamScore,
+    bestMockExamScore,
   };
 }

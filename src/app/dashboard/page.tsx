@@ -25,6 +25,10 @@ export default function DashboardPage() {
       </section>
 
       <section className="mt-8 flex flex-wrap gap-3">
+        <Link href="/mock-exam" className={secondaryLinkClass}>
+          Take a mock exam
+          <ArrowRight className="ml-2 size-4" />
+        </Link>
         <Link href="/practice" className={secondaryLinkClass}>
           Return to practice
           <ArrowRight className="ml-2 size-4" />

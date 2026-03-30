@@ -263,6 +263,7 @@ export type PracticeQuestion =
 export const siteNavigation: SiteNavigationItem[] = [
   { href: "/", label: text("Home", "Accueil") },
   { href: "/learn", label: text("Learn", "Apprendre") },
+  { href: "/mock-exam", label: text("Mock Exam", "Examen Blanc") },
   { href: "/implementation-journey", label: text("Journey", "Parcours") },
   { href: "/case-studies", label: text("Case Studies", "Études de cas") },
   { href: "/practice", label: text("Practice", "Pratique") },

@@ -4,6 +4,7 @@ import {
   BookOpen,
   CheckCircle2,
   ClipboardList,
+  FileCheck2,
   FlaskConical,
   LayoutDashboard,
   Map,
@@ -15,6 +16,12 @@ import { ModuleGrid } from "@/components/app/module-grid";
 import { ProgressOverview } from "@/components/app/progress-overview";
 
 const quickLinks = [
+  {
+    href: "/mock-exam",
+    icon: FileCheck2,
+    title: { en: "Mock Exam", fr: "Examen blanc" },
+    desc: { en: "Timed ISO 27001 readiness exams", fr: "Examens chronometres de preparation ISO 27001" },
+  },
   {
     href: "/learn/what-is-iso-27001",
     icon: BookOpen,
@@ -54,6 +61,7 @@ const quickLinks = [
 ] as const;
 
 const highlights = [
+  { en: "Timed mock exams with realistic ISO 27001-style questions", fr: "Examens blancs chronometres avec questions de style ISO 27001 realistes" },
   { en: "12 guided modules from foundations to capstone", fr: "12 modules guides des fondamentaux au capstone" },
   { en: "93 Annex A controls with evidence guidance", fr: "93 mesures Annexe A avec guide de preuves" },
   { en: "Risk, SoA, audit, and nonconformity labs", fr: "Labs risque, SoA, audit et non-conformite" },
@@ -84,17 +92,17 @@ export default function HomePage() {
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link
-                href="/learn/what-is-iso-27001"
+                href="/mock-exam"
                 className="inline-flex h-11 items-center gap-2 rounded-full bg-slate-950 px-6 text-sm font-medium text-white transition hover:bg-slate-800"
               >
-                <LocalizedInline value={{ en: "Start from zero", fr: "Commencer de zero" }} />
+                <LocalizedInline value={{ en: "Take a mock exam", fr: "Passer un examen blanc" }} />
                 <ArrowRight className="size-4" />
               </Link>
               <Link
-                href="/learn"
+                href="/learn/what-is-iso-27001"
                 className="inline-flex h-11 items-center rounded-full border border-slate-200 bg-white px-6 text-sm font-medium text-slate-700 transition hover:border-slate-300"
               >
-                <LocalizedInline value={{ en: "Browse modules", fr: "Parcourir les modules" }} />
+                <LocalizedInline value={{ en: "Start from zero", fr: "Commencer de zero" }} />
               </Link>
             </div>
           </div>
