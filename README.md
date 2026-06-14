@@ -4,6 +4,11 @@ ISO 27001 Lab is a bilingual learning platform for ISO/IEC 27001 with English, F
 
 The app combines guided learning, clause exploration, control discovery, risk treatment practice, SoA simulation, audit drills, nonconformity classification, and learner progress tracking in one product surface.
 
+## Recruiter snapshot
+- Bilingual ISO 27001 product built for real learner workflows, not generic documentation browsing
+- Strong full-stack evidence: Next.js 16, React 19, TypeScript, Tailwind, Supabase, and structured course data
+- Demonstrates product thinking across learning design, compliance workflows, practice labs, and admin/content architecture
+
 ## Top-level information architecture
 
 - Home
